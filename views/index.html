@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>title</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+  </head>
+  <body>
+  	<div class="">
+    	<form id="find" action="" class="" method="" novalidate="">
+      	<div id="field1-container" class="field f_100">
+        	<label for="lat">Lat</label>
+          <input type="text" name="lat" id="lat" required="required">
+        </div>
+        <div id="field2-container" class="field f_100">
+        	<label for="long">Long</label>
+          <input type="text" name="long" id="long" required="required">
+        </div>
+        <div id="form-submit" class="field f_100 clearfix submit">
+        	<input type="submit" value="Submit">
+        </div>
+    	</form>
+		</div>
+
+		<div id="result">
+			<span id="latlng"></span>
+			<span id="crime"></p>
+		</div>
+
+		<script>
+  		$( "#find" ).submit(function( event ) {
+			 	var lon = $("#long").val();
+			 	var lat = $("#lat").val();
+
+			 	$.ajax({
+				  url: "http://data.police.uk/api/crimes-street/all-crime?lat=" + lat + "&lng=" + lon,
+				  context: document.body
+				}).done(function( data ) {
+					$("#latlng").text(lat + "° N, " + lon + "° W:" )
+				 	$("#crime").text("Crime: " + data[0].category);
+				});
+			  event.preventDefault();
+			});
+    </script>
+  </body>
+</html>

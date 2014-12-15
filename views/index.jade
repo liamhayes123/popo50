@@ -1,0 +1,46 @@
+doctype html(lang='en')
+head
+    meta(charset='utf-8')
+    |     
+    title title
+    |     
+    link(rel='stylesheet', href='style.css')
+    |     
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+  |   
+  body
+    div
+      form#find(action='', method='', novalidate='')
+        #field1-container.field.f_100
+          label(for='lat') Lat
+          |           
+          input#lat(type='text', name='lat', required='required')
+        |         
+        #field2-container.field.f_100
+          label(for='long') Long
+          |           
+          input#long(type='text', name='long', required='required')
+        |         
+        #form-submit.field.f_100.clearfix.submit
+          input(type='submit', value='Submit')
+    | &#x9;&#x9;
+    #result
+      span#latlng
+      | &#x9;&#x9;&#x9;
+      span#crime
+        p
+    | &#x9;&#x9;
+    script.
+      $( "#find" ).submit(function( event ) {
+      var lon = $("#long").val();
+      var lat = $("#lat").val();
+      $.ajax({
+      url: "http://data.police.uk/api/crimes-street/all-crime?lat=" + lat + "&lng=" + lon,
+      context: document.body
+      }).done(function( data ) {
+      $("#latlng").text(lat + "° N, " + lon + "° W:" )
+      $("#crime").text("Crime: " + data[0].category);
+      });
+      event.preventDefault();
+      });
+
