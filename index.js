@@ -12,13 +12,28 @@ server.views({
 
 server.connection({ port: (process.env.PORT || 3000) });
 
-server.route({
+server.route([{
     method: 'GET',
     path: '/',
     handler: function (request, reply) {
         reply.view('index');
     }
-});
+  },
+  {
+    method: 'GET',
+    path: '/crime',
+    handler: function(request, reply) {
+      reply.text('soon');
+    }
+  },
+  {
+    method: 'GET',
+    path: '/map',
+    handler: function(request, reply) {
+	reply.view('map');
+    }
+  }
+]);
 
 server.start(function () {
     console.log('Server running at:', server.info.uri);

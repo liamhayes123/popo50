@@ -8,8 +8,16 @@
 
   </head>
   <body>
+    <a href="/map">See Map</a>
   	<div class="">
-    	<form id="find" action="" class="" method="" novalidate="">
+          current long and lat to search by:
+	  <ul>
+	    <li>-0.696466, 51.904095</li>
+	    <li>-0.556254, 52.222072</li>
+	    <li>-0.494457, 52.160646</li>
+	    <li>-0.500503, 52.165191</li>
+	  </ul>
+    	<form id="find" action="/crime" class="" method="POST" novalidate="">
       	<div id="field1-container" class="field f_100">
         	<label for="lat">Lat</label>
           <input type="text" name="lat" id="lat" required="required">
@@ -29,20 +37,5 @@
 			<span id="crime"></p>
 		</div>
 
-		<script>
-  		$( "#find" ).submit(function( event ) {
-			 	var lon = $("#long").val();
-			 	var lat = $("#lat").val();
-
-			 	$.ajax({
-				  url: "http://data.police.uk/api/crimes-street/all-crime?lat=" + lat + "&lng=" + lon,
-				  context: document.body
-				}).done(function( data ) {
-					$("#latlng").text(lat + "° N, " + lon + "° W:" )
-				 	$("#crime").text("Crime: " + data[0].category);
-				});
-			  event.preventDefault();
-			});
-    </script>
   </body>
 </html>
